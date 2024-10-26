@@ -17,16 +17,18 @@ public class TransferController {
   @Autowired WorkflowClient client;
 
   @GetMapping("/transfer")
-  public String hello(Model model) {
+  public String transfer() {
     var transferWorkflow = client.newWorkflowStub(AccountTransferWorkflow.class, WorkflowOptions.newBuilder()
             .setTaskQueue("AccountTransferQueue")
             .build());
+
     var transferRequest = new TransferRequestPOJO("fromAccount", "toAccount", 1000);
 
     System.out.println("Before transfer");
 
     var result = transferWorkflow.transfer(transferRequest);
     System.out.println(result);
+
     System.out.println("After transfer");
     return result;
   }
