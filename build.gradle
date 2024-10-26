@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group = 'pl.mbaranowski'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "io.temporal:temporal-sdk:1.26.1"
+    implementation "org.springframework.boot:spring-boot-starter-web:2.7.13"
+    implementation "io.temporal:temporal-spring-boot-starter:1.26.1"
+}
