@@ -4,7 +4,7 @@ import pl.mbaranowski._0_core.TransferRequestPOJO;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        var transfer = new AccountTransferImpl();
+        var transfer = new AccountTransferWorkflowImpl();
         var transferRequest = new TransferRequestPOJO("fromAccount", "toAccount", 1000);
 
         System.out.println("Before transfer");

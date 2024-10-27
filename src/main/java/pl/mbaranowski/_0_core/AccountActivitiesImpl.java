@@ -1,6 +1,6 @@
-package pl.mbaranowski._3_temporal;
+package pl.mbaranowski._0_core;
 
-public class AccountImpl implements Account {
+public class AccountActivitiesImpl implements AccountActivities {
 
   @Override
   public String withdraw(String accountId, String transferId, long amountCents) {

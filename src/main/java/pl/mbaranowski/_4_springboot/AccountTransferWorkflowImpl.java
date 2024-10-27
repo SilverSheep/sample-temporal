@@ -12,12 +12,12 @@ public class AccountTransferWorkflowImpl implements AccountTransferWorkflow {
 
   private final ActivityOptions options =
       ActivityOptions.newBuilder().setStartToCloseTimeout(Duration.ofSeconds(5)).build();
-  private final Account account = Workflow.newActivityStub(Account.class, options);
+  private final AccountActivities accountActivities = Workflow.newActivityStub(AccountActivities.class, options);
 
   @Override
   public String transfer(TransferRequestPOJO transferRequest) {
-    account.withdraw(transferRequest.getFrom(), transferRequest.getTransferId(), transferRequest.getAmount());
-    account.deposit(transferRequest.getTo(), transferRequest.getTransferId(), transferRequest.getAmount());
+    accountActivities.withdraw(transferRequest.getFrom(), transferRequest.getTransferId(), transferRequest.getAmount());
+    accountActivities.deposit(transferRequest.getTo(), transferRequest.getTransferId(), transferRequest.getAmount());
 
     return "Successfully transferred money from: " + transferRequest.getFrom() + " to " + transferRequest.getTo();
   }

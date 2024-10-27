@@ -1,10 +1,10 @@
-package pl.mbaranowski._3_temporal;
+package pl.mbaranowski._4_springboot;
 
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
 
 @ActivityInterface
-public interface Account {
+public interface AccountActivities {
 
   @ActivityMethod
   String withdraw(String accountId, String transferId, long amountCents);

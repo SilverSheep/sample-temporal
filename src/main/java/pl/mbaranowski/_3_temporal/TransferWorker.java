@@ -19,7 +19,7 @@ public class TransferWorker {
     var factory = WorkerFactory.newInstance(client);
     var worker = factory.newWorker(TASK_QUEUE);
 
-    var account = new AccountImpl();
+    var account = new AccountActivitiesImpl();
 
     worker.registerWorkflowImplementationTypes(AccountTransferWorkflowImpl.class);
     worker.registerActivitiesImplementations(account);

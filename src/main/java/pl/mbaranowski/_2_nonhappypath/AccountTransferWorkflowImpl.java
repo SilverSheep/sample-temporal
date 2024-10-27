@@ -1,12 +1,12 @@
 package pl.mbaranowski._2_nonhappypath;
 
-import pl.mbaranowski._0_core.Account;
-import pl.mbaranowski._0_core.AccountImpl;
+import pl.mbaranowski._0_core.AccountActivities;
+import pl.mbaranowski._0_core.AccountActivitiesImpl;
 import pl.mbaranowski._0_core.TransferRequestPOJO;
 
-public class AccountTransferImpl implements AccountTransfer {
+public class AccountTransferWorkflowImpl implements AccountTransferWorkflow {
 
-  private final Account account = new AccountImpl();
+  private final AccountActivities accountActivities = new AccountActivitiesImpl();
   private final int maxTries = 4;
 
   // debounce to avoid DoS on transaction system
@@ -21,7 +21,7 @@ public class AccountTransferImpl implements AccountTransfer {
 
     while (!success && tryNo <= maxTries) {
       try {
-        account.withdraw(transferRequest.getFrom(), transferRequest.getTransferId(), transferRequest.getAmount());
+        accountActivities.withdraw(transferRequest.getFrom(), transferRequest.getTransferId(), transferRequest.getAmount());
         success = true;
       } catch (Exception e) {
         System.out.println("Exception occured while withdrawing from " + transferRequest.getFrom());
@@ -41,7 +41,7 @@ public class AccountTransferImpl implements AccountTransfer {
 
     while (!success && tryNo <= maxTries) {
       try {
-        account.deposit(transferRequest.getTo(), transferRequest.getTransferId(), transferRequest.getAmount());
+        accountActivities.deposit(transferRequest.getTo(), transferRequest.getTransferId(), transferRequest.getAmount());
         success = true;
       } catch (Exception e) {
         System.out.println("Exception occured while depositing to " + transferRequest.getTo());
@@ -57,7 +57,7 @@ public class AccountTransferImpl implements AccountTransfer {
 
     // return money to sender
     System.out.println("Unsuccessful deposit. Returning money");
-    account.deposit(transferRequest.getTo(), transferRequest.getTransferId(), transferRequest.getAmount());
+    accountActivities.deposit(transferRequest.getFrom(), transferRequest.getTransferId(), transferRequest.getAmount());
 
     return "Unsuccessful transfer. Returned money back";
   }

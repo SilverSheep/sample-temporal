@@ -1,6 +1,11 @@
-package pl.mbaranowski._0_core;
+package pl.mbaranowski._4_springboot;
 
-public class AccountImpl implements Account {
+import io.temporal.spring.boot.ActivityImpl;
+import org.springframework.stereotype.Component;
+
+@Component
+@ActivityImpl(taskQueues = "AccountTransferQueue")
+public class AccountActivitiesImpl implements AccountActivities {
 
   @Override
   public String withdraw(String accountId, String transferId, long amountCents) {
