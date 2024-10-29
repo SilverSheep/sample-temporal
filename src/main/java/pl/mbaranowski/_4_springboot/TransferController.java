@@ -16,8 +16,8 @@ public class TransferController {
 
   @Autowired WorkflowClient client;
 
-  @GetMapping("/transfer")
-  public String transfer() {
+  @GetMapping("/transfer")    // don't do this at home (only for presentation purposes); use @PostMapping instead
+  public ResponseEntity<String> transfer() {
     var transferWorkflow = client.newWorkflowStub(AccountTransferWorkflow.class, WorkflowOptions.newBuilder()
             .setTaskQueue("AccountTransferQueue")
             .build());
@@ -30,6 +30,6 @@ public class TransferController {
     System.out.println(result);
 
     System.out.println("After transfer");
-    return result;
+    return ResponseEntity.ok(result);
   }
 }
